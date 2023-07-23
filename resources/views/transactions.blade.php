@@ -1,0 +1,39 @@
+@extends('layouts.app')
+
+@section('content')
+    <div>
+        <div class="mb-3 flex items-center justify-between">
+            <h2 class="text-xl font-semibold">All Transactions</h2>
+        </div>
+        <div>
+            <table class="w-full">
+                <thead>
+                    <tr class="border-b text-left">
+                        <th class="p-2">ID</th>
+                        <th class="p-2">Transaction Type</th>
+                        <th class="p-2">Amount</th>
+                        <th class="p-2">Fee</th>
+                        <th class="p-2">User</th>
+                        <th class="p-2">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($transactions as $transaction)
+                        <tr class="border-b text-left">
+                            <td class="p-2">{{ $transaction->id }}</td>
+                            <td class="p-2">{{ $transaction->transaction_type }}</td>
+                            <td class="p-2">{{ $transaction->amount }}</td>
+                            <td class="p-2">{{ $transaction->fee ?? '-' }}</td>
+                            <td class="p-2">{{ $transaction->user->name }}</td>
+                            <td class="p-2">{{ $transaction->date->diffForHumans() }}</td>
+                        </tr>
+                    @empty
+                        <tr class="border-b text-left">
+                            <td class="p-2 text-center" colspan="100%">No Data Foun!</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+@endsection
