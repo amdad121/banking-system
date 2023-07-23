@@ -34,7 +34,7 @@ you need to copy .env.example to .env
 cp .env.example .env
 ```
 
-you need to copy .env.example to .env
+to generate app key run this command
 
 ```sh
 php artisan key:generate
@@ -46,6 +46,14 @@ then you run this command
 
 ```sh
 php artisan migrate --seed
+```
+
+Install node dependencies and build
+
+```sh
+npm install
+
+npm run build
 ```
 
 then you run this command
