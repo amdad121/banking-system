@@ -42,9 +42,15 @@ class WithdrawalController extends Controller
 
         $monthly_amount_limit = $query->whereMonth('date', Carbon::now()->month)->sum('amount') > $request->amount ? $query->whereMonth('date', Carbon::now()->month)->sum('amount') : $request->amount;
 
-        $percentage = ($user->account_type == 'Individual') || (($user->account_type == 'Business') && ($amount_limit > 50000)) ? 0.015 : 0.025;
+        $percentage = 0.015;
 
-        $fee = ((now()->format('l') == 'Friday') || ($amount_limit < 1000) || ($monthly_amount_limit < 5000)) ? null : (($percentage / 100) * $request->amount);
+        if ($user->account_type == 'Individual') {
+            $fee = ((now()->format('l') == 'Friday') || ($amount_limit < 1000) || ($monthly_amount_limit < 5000)) ? null : (($percentage / 100) * $request->amount);
+        } else {
+            $percentage = $amount_limit > 50000 ? $percentage : 0.025;
+
+            $fee = ($percentage / 100) * $request->amount;
+        }
 
         $amount = $fee + $request->amount;
 
