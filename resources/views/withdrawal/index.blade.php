@@ -34,6 +34,9 @@
                     @endforelse
                 </tbody>
             </table>
+            <div>
+                {{ $withdrawal_transactions->links() }}
+            </div>
         </div>
     </div>
 @endsection

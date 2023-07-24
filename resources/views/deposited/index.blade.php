@@ -32,6 +32,9 @@
                     @endforelse
                 </tbody>
             </table>
+            <div>
+                {{ $deposited_transactions->links() }}
+            </div>
         </div>
     </div>
 @endsection

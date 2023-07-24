@@ -14,7 +14,7 @@ class WithdrawalController extends Controller
      */
     public function index()
     {
-        $withdrawal_transactions = Transaction::whereTransactionType('Withdrawal')->paginate(10);
+        $withdrawal_transactions = Transaction::whereTransactionType('Withdrawal')->simplePaginate(10);
 
         return view('withdrawal.index', compact('withdrawal_transactions'));
     }

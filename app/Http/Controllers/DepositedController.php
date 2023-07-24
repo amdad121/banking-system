@@ -13,7 +13,7 @@ class DepositedController extends Controller
      */
     public function index()
     {
-        $deposited_transactions = Transaction::whereTransactionType('Deposited')->paginate(10);
+        $deposited_transactions = Transaction::whereTransactionType('Deposited')->simplePaginate(10);
 
         return view('deposited.index', compact('deposited_transactions'));
     }
